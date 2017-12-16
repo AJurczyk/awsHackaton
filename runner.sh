@@ -15,7 +15,10 @@ if [ "$RUNNING" = "true" ]; then
   fi
 
   docker rm $CONTAINER_NAME > /dev/null
-  exit $?
+  $ERROR = $?
+  if [ $ERROR -ne 0 ]; then
+    exit $ERROR
+  fi
 fi
 
 docker build -t $CONTAINER_NAME .
